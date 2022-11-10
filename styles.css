@@ -1,0 +1,80 @@
+/*
+scroll left container
+style small btns
+*/
+
+html,
+body {
+  margin: 0;
+  font-family: 'Kanit', sans-serif;
+  display: flex;
+}
+
+.left-side-list {
+  width: 20vw;
+  height: 100%;
+  background-color: rgb(33, 33, 67);
+  color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+  border-bottom: 3px solid aliceblue;
+  font-size: larger;
+  display: flex;
+  justify-content: center;
+}
+
+.student-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add {
+  background-color: red;
+  border: none;
+  color: aliceblue;
+  font-size: large;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.minus {
+  background-color: green;
+  border: none;
+  color: aliceblue;
+  font-size: large;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  cursor: pointer;
+  /* text-align: center;
+  text-decoration: none;
+  display: inline-block; */
+}
+
+.center-container {
+  background-color: rgb(212, 214, 232);
+  width: 80vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.select-btn {
+  background-color: rgb(33, 33, 67);
+  color: aliceblue;
+  border: none;
+  padding: 20px 125px;
+  border-radius: 4px;
+}
