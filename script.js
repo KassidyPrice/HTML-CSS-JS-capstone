@@ -1,10 +1,9 @@
 /* 
-add/minus btns: pushes name to array, pops name from array. How do I make sure it's the right name? lastIndexOf()
-display weight +1
-select btn: loops through array, flip animation, randomly selects an index. Displays that element as an H1. color change animation the name that was selected.
-To make sure indexes of array are not used twice, add conditional or use temp array, slice and push? 
-When Array is empty assign temp array to it, unhighlight each name, start loop over,
-Can you decrease weight in the middle of a round? yes
+select btn: color change the name that was selected.
+
+To make sure indexes of array are not used twice, slice and push to a temp array.
+When Array is empty assign temp array to it, start loop over.
+
 How can I use OOP?
  */
 
@@ -54,8 +53,6 @@ async function populateList(users) {
     btnContainer.classList.add('btn-container')
     add.classList.add('add')
     add.innerText = '+'
-    add.onclick = handleAdd
-
     minus.classList.add('minus')
     minus.innerText = '-'
 
@@ -65,30 +62,65 @@ async function populateList(users) {
     studentContainer.appendChild(btnContainer)
     leftSideList.appendChild(studentContainer)
 
-    function handleAdd(e) {
-      add.addEventListener('click', () => {
+    add.addEventListener('click', (e) => {
+      e.target.parentElement.previousElementSibling.innerText = `${fname} : ${
+        weight + 1
+      }`
+      weight++
+      users.push(fname)
+      console.log(users)
+    })
+
+    minus.addEventListener('click', (e) => {
+      if (weight > 0) {
         e.target.parentElement.previousElementSibling.innerText = `${fname} : ${
-          weight + 1
+          weight - 1
         }`
-        console.log('added')
-      })
-    }
+        weight--
+        users.splice(users.lastIndexOf(fname), 1)
+        console.log(users)
+      }
+    })
   }
 }
 
-// const forLoop = async (users) => {
-//   for (let i = 0; i < users.length; i++) {
-//     console.log(users[i])
-//   }
-// }
+const h1 = document.querySelector('h1')
+const selectBtn = document.getElementById('select-btn')
 
-// .then((res) => {
-//   res = res.json()
-//   // console.log(res)
-//   return res // JSON data parsed by `data.json()` or JSON.parse(data) call
-// })
-// // .then((data) => console.log(data.users[1].first_name))
-// .then((data) => {
-//   data.users.map((user) => users.push(user.first_name))
-//   return users
-// })
+generateIndex = () => {
+  while (users.length > 0) {
+    let random = Math.floor(Math.random() * users.length - 1) + 1
+    return random
+  }
+}
+
+const sleep = (time) => {
+  return new Promise((resolve) => setTimeout(resolve, time))
+}
+
+const doSomething = async () => {
+  for (let i = 0; i < users.length; i++) {
+    await sleep(50)
+    h1.innerText = users[i]
+  }
+}
+
+let temp = []
+
+const selectUser = async () => {
+  await doSomething()
+  const userIndex = generateIndex()
+  console.log(userIndex)
+  console.log(users)
+  h1.innerText = users[userIndex]
+  // user = users.splice(users[userIndex], 1)
+  // temp.push(user)
+  h1.classList.add('animatedH1')
+  console.log(temp)
+}
+
+selectBtn.addEventListener('click', (e) => {
+  doSomething()
+  selectUser()
+  h1.classList.remove('animatedH1')
+})
