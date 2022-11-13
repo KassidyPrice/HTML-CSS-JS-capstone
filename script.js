@@ -1,8 +1,5 @@
 /* 
-select btn: color change the name that was selected.
-
-To make sure indexes of array are not used twice, slice and push to a temp array.
-When Array is empty assign temp array to it, start loop over.
+Last name not the first name chosen?
 
 How can I use OOP?
  */
@@ -35,20 +32,18 @@ myFetch()
   .catch((err) => console.log(err))
 
 const leftSideList = document.getElementById('left-side-list')
+const studentContainer = document.getElementById('student-container')
 
 async function populateList(users) {
   for (let user of users) {
     let fname = user
-    // console.log(fname)
     let weight = 1
 
-    const studentContainer = document.createElement('div')
     const nameWeight = document.createElement('p')
     const btnContainer = document.createElement('div')
     const add = document.createElement('button')
     const minus = document.createElement('button')
 
-    studentContainer.classList.add('student-container')
     nameWeight.innerText = `${fname} : ${weight}`
     btnContainer.classList.add('btn-container')
     add.classList.add('add')
@@ -106,17 +101,27 @@ const doSomething = async () => {
 }
 
 let temp = []
+const listChildren = studentContainer.children
 
 const selectUser = async () => {
   await doSomething()
   const userIndex = generateIndex()
-  console.log(userIndex)
-  console.log(users)
   h1.innerText = users[userIndex]
-  // user = users.splice(users[userIndex], 1)
-  // temp.push(user)
   h1.classList.add('animatedH1')
-  console.log(temp)
+
+  for (child of listChildren) {
+    child.classList.remove('highlightedUser')
+    if (child.innerText.includes(users[userIndex])) {
+      child.classList.add('highlightedUser')
+    }
+  }
+  user = users.splice(userIndex, 1)
+  temp.push(...user)
+
+  if (users.length == 0) {
+    users = temp
+    temp = []
+  }
 }
 
 selectBtn.addEventListener('click', (e) => {
