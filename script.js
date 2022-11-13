@@ -63,7 +63,6 @@ async function populateList(users) {
       }`
       weight++
       users.push(fname)
-      console.log(users)
     })
 
     minus.addEventListener('click', (e) => {
@@ -73,7 +72,6 @@ async function populateList(users) {
         }`
         weight--
         users.splice(users.lastIndexOf(fname), 1)
-        console.log(users)
       }
     })
   }
@@ -115,6 +113,7 @@ const selectUser = async () => {
       child.classList.add('highlightedUser')
     }
   }
+
   user = users.splice(userIndex, 1)
   temp.push(...user)
 
